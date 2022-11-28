@@ -24,7 +24,8 @@
 
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
-import { ALTERA_PROJETO , ADICIONA_PROJETO} from '@/store/tipo-mutacoes';
+import { ALTERA_PROJETO , ADICIONA_PROJETO, NOTIFICAR} from '@/store/tipo-mutacoes';
+import { TipoNotificacao } from '@/interfaces/INotificacao';
 //import { computed } from '@vue/reactivity';
 //import IProjeto from '../interfaces/IProjeto'
 
@@ -64,6 +65,11 @@ export default defineComponent({
             }
            
             this.nomeDoProjeto = '';
+            this.store.commit(NOTIFICAR, {
+                titulo: 'Novo projeto foi salvo',
+                texto: 'Projeto disponivel',
+                tipo: TipoNotificacao.SUCESSO
+            })
             this.$router.push('/projetos')
         }
     },
